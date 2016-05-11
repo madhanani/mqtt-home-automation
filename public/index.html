@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+
+    <title>Navbar Template for Bootstrap</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container" ng-controller="AppCtrl">
+        
+		<div class="row">
+
+	        <div class="col-md-3">
+		        <div class="panel panel-primary">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Create Publish Topic</h3>
+		            </div>
+		            <div class="panel-body">
+		                <form>
+		                	<div class="form-group">
+		                        <label for="username">Username</label>
+		                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="pubtopic.username">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="pubtopic.name">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="pubtopiname">Topic</label>
+		                        <input type="text" class="form-control" id="pubtopicname" placeholder="Topic" ng-model="pubtopic.topicname">
+		                    </div>
+		                    <button type="submit" class="btn btn-primary col-xs-12" ng-click="addPubTopic()">Publish Topic</button>
+		                </form>
+		            </div>
+		        </div>   
+	        </div>
+
+	        <div class="col-md-3">
+		        <div class="panel panel-success">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Edit Publish Topic</h3>
+		            </div>
+		            <div class="panel-body">
+		                <form>
+		                	<div class="form-group">
+		                        <label for="username">Username</label>
+		                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="editpubtopic.username" disabled>
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="editpubtopic.name">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="pubtopiname">Topic</label>
+		                        <input type="text" class="form-control" id="pubtopicname" placeholder="Topic" ng-model="editpubtopic.topicname" disabled>
+		                    </div>
+		                    <button type="submit" class="btn btn-success col-xs-12" ng-click="editPubTopic(editpubtopic._id)">Edit Publish Topic</button>
+		                </form>
+		            </div>
+		        </div>   
+	        </div>
+
+	        <div class="col-md-6">
+		        <div class="panel panel-danger">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Publish Topic List</h3>
+		            </div>
+		            <div class="panel-body">
+		                <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<th>Name</th>
+			            			<th>Topic</th>
+			            			<th>Username</th>
+			            			<th>Value</th>
+			            			<th>Action</th>
+			            		</tr>
+			            	</thead>
+			            	<tbody>
+			            		<tr ng-repeat="pubtopic in pubtopics">
+			            			<td>{{pubtopic.name}}</td>
+			            			<td>{{pubtopic.topicname}}</td>
+			            			<td>{{pubtopic.username}}</td>
+			            			<td>{{pubtopic.value}}</td>
+			            			<td>
+			            				<button class="btn btn-default btn-xs" ng-show="pubtopic.value == 'OFF'" ng-click="on(pubtopic._id)"><span class="glyphicon glyphicon-off"></span></button>
+			            				<button class="btn btn-primary btn-xs" ng-show="pubtopic.value == 'ON'" ng-click="off(pubtopic._id)"><span class="glyphicon glyphicon-off"></span></button>
+			            				<button class="btn btn-success btn-xs" ng-click="loadEditPubTopic(pubtopic._id)"><span class="glyphicon glyphicon-edit"></span></button>
+			            				<button class="btn btn-info btn-xs" ng-click="setJob(pubtopic._id)"><span class="glyphicon glyphicon-time"></span></button>
+			            				<button class="btn btn-danger btn-xs" ng-click="deletePubTopic(pubtopic._id)"><span class="glyphicon glyphicon-remove"></span></button>
+			            			</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+		            </div>
+		        </div>  
+	        </div>
+
+	    </div>
+
+	    <hr>
+
+	    <div class="row">
+
+	        <div class="col-md-3">
+		        <div class="panel panel-primary">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Create Subscribe Topic</h3>
+		            </div>
+		            <div class="panel-body">
+		                <form>
+		                	<div class="form-group">
+		                        <label for="username">Username</label>
+		                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="subtopic.username">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="subtopic.name">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="subtopicname">Topic</label>
+		                        <input type="text" class="form-control" id="subtopicname" placeholder="Topic" ng-model="subtopic.topicname">
+		                    </div>
+		                    <button type="submit" class="btn btn-primary col-xs-12" ng-click="addSubTopic()">Subscribe Topic</button>
+		                </form>
+		            </div>
+		        </div>   
+	        </div>
+
+	        <div class="col-md-3">
+		        <div class="panel panel-success">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Edit Subscribe Topic</h3>
+		            </div>
+		            <div class="panel-body">
+		                <form>
+		                	<div class="form-group">
+		                        <label for="username">Username</label>
+		                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="editsubtopic.username" disabled>
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="editsubtopic.username">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="subtopicname">Topic</label>
+		                        <input type="text" class="form-control" id="subtopicname" placeholder="Topic" ng-model="editsubtopic.topicname" disabled>
+		                    </div>
+		                    <button type="submit" class="btn btn-success col-xs-12" ng-click="editSubTopic(editsubtopic._id)">Edit Subscribe Topic</button>
+		                </form>
+		            </div>
+		        </div>   
+	        </div>
+
+
+	        <div class="col-md-6">
+		        <div class="panel panel-danger">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Subscribe Topic List</h3>
+		            </div>
+		            <div class="panel-body">
+		                <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<th>Name</th>
+			            			<th>Topic</th>
+			            			<th>User</th>
+			            			<th>Value</th>
+			            			<th>Action</th>
+			            		</tr>
+			            	</thead>
+			            	<tbody>
+			            		<tr ng-repeat="subtopic in subtopics">
+			            			<td>{{subtopic.name}}</td>
+			            			<td>{{subtopic.topicname}}</td>
+			            			<td>{{subtopic.username}}</td>
+			            			<td id="{{subtopic.username}}/{{subtopic.topicname}}">{{subtopic.value}}</td>
+			            			<td>
+			            				<button class="btn btn-success btn-xs" ng-click="loadEditSubTopic(subtopic._id)"><span class="glyphicon glyphicon-edit"></span></button>
+			            				<button class="btn btn-danger btn-xs" ng-click="deleteSubTopic(subtopic._id)"><span class="glyphicon glyphicon-remove"></span></button>
+			            			</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+		            </div>
+		        </div>  
+	        </div>
+
+	    </div>
+
+	    <hr>
+
+	    <div class="row">
+
+	    	<div class="col-md-3">
+		        <div class="panel panel-info">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Create Schedule</h3>
+		            </div>
+		            <div class="panel-body">
+		                <form>
+		                	<div class="form-group">
+		                        <label for="username">Username</label>
+		                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="schedule.username" disabled>
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="name">Name</label>
+		                        <input type="text" class="form-control" id="name" placeholder="Name" ng-model="schedule.name" disabled>
+		                    </div>
+		                	<div class="form-group">
+		                        <label for="topicname">Topic Name</label>
+		                        <input type="text" class="form-control" id="topicname" placeholder="Topic Name" ng-model="schedule.topicname" disabled>
+		                    </div>
+		                    <hr>
+		                    <div class="form-group">
+		                        <label for="datetime">Schedule Date/Time</label>
+		                        <input type="datetime-local" class="form-control" id="datetime" placeholder="Schedule Date/Time" ng-model="schedule.datetime">
+		                    </div>
+		                    <div class="form-group">
+		                        <label for="value">Value</label>
+		                        <input type="text" class="form-control" id="value" placeholder="Value" ng-model="schedule.value">
+		                    </div>
+		                    <button type="submit" class="btn btn-info col-xs-12" ng-click="saveSchedule()">Save Schedule</button>
+		                </form>
+
+		            </div>
+		        </div>   
+	        </div>
+
+	    	<div class="col-md-9">
+		        <div class="panel panel-danger">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Schedule List</h3>
+		            </div>
+		            <div class="panel-body">
+		                <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<th>Name</th>
+			            			<th>Topic</th>
+			            			<th>Username</th>
+			            			<th>Schedule Date/Time</th>
+			            			<th>Value</th>
+			            			<th>Action</th>
+			            		</tr>
+			            	</thead>
+			            	<tbody>
+			            		<tr ng-repeat="schedule in schedules">
+			            			<td>{{schedule.name}}</td>
+			            			<td>{{schedule.topicname}}</td>
+			            			<td>{{schedule.username}}</td>
+			            			<td>{{schedule.datetime | date : 'medium'}}</td>
+			            			<td>{{schedule.value}}</td>
+			            			<td>
+			            				<button class="btn btn-danger btn-xs" ng-click="deleteSchedule(schedule.schedulename)"><span class="glyphicon glyphicon-remove"></span></button>
+			            			</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+
+		            </div>
+		        </div>  
+	        </div>
+	    </div>
+
+    </div>
+
+	<script src="js/angular.min.js" type="text/javascript"></script>
+	<script src="js/socket.io.min.js" type="text/javascript"></script>
+	<script src="js/controller.js" type="text/javascript"></script>
+</body>
+</html>

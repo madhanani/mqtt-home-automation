@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+
+    <title>Navbar Template for Bootstrap</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <style type="text/css">
+		.myButton {
+			-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+			-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+			box-shadow:inset 0px 39px 0px -24px #e67a73;
+			background-color:#e4685d;
+			-moz-border-radius:4px;
+			-webkit-border-radius:4px;
+			border-radius:4px;
+			border:1px solid #ffffff;
+			display:inline-block;
+			cursor:pointer;
+			color:#ffffff;
+			font-family:Arial;
+			font-size:14px;
+			font-weight:bold;
+			padding:32px 50px;
+			text-decoration:none;
+			text-shadow:0px 1px 0px #b23e35;
+		}
+		.myButton:hover {
+			background-color:#eb675e;
+			text-decoration: none;
+			color: #fff;
+		}
+		.myButton:link {
+			text-decoration: none;
+			color: #fff;
+		}
+		.myButton:visited {
+			text-decoration: none;
+			color: #fff;
+		}
+		.myButton:active {
+			position:relative;
+			top:1px;
+		}
+    </style>
+</head>
+
+<body>
+
+    <div class="container" ng-controller="AppCtrl">
+
+        <div class="row">
+
+			<div class="col-md-8">
+		        <div class="panel panel-danger">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Control Panel</h3>
+		            </div>
+		            <div class="panel-body">
+		                <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<th>Name</th>
+			            			<th>Value</th>
+			            			<th>Action</th>
+			            		</tr>
+			            	</thead>
+			            	<tbody>
+			            		<tr ng-repeat="pubtopic in pubtopics">
+			            			<td>{{pubtopic.name}}</td>
+			            			<td>{{pubtopic.value}}</td>
+			            			<td>
+			            				<button class="btn btn-default btn-lg" ng-show="pubtopic.value == 'OFF'" ng-click="on(pubtopic._id)"><span class="glyphicon glyphicon-off"></span></button>
+			            				<button class="btn btn-primary btn-lg" ng-show="pubtopic.value == 'ON'" ng-click="off(pubtopic._id)"><span class="glyphicon glyphicon-off"></span></button>
+			            			</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+		            </div>
+		        </div>  
+	        </div>
+
+	    	<div class="col-md-4">
+		        <div class="panel panel-danger">
+		            <div class="panel-heading">
+		                <h3 class="panel-title">Monitoring Panel</h3>
+		            </div>
+		            <div class="panel-body">
+		                <table class="table">
+			            	<thead>
+			            		<tr>
+			            			<th>Name</th>
+			            			<th>Value</th>
+			            		</tr>
+			            	</thead>
+			            	<tbody>
+			            		<tr ng-repeat="subtopic in subtopics">
+			            			<td>{{subtopic.name}}</td>
+			            			<td id="{{subtopic.username}}/{{subtopic.topicname}}">{{subtopic.value}}</td>
+			            		</tr>
+			            	</tbody>
+			            </table>
+		            </div>
+		        </div>  
+	        </div>
+
+	    </div>	
+
+	</div>
+
+	<script src="js/angular.min.js" type="text/javascript"></script>
+	<script src="js/socket.io.min.js" type="text/javascript"></script>
+	<script src="js/controller.js" type="text/javascript"></script>
+</body>
+</html>
